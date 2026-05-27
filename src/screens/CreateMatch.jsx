@@ -136,7 +136,7 @@ function CreateMatch({ accessRole = "jogador", onCreateMatch }) {
           </label>
           <button className="primary-button form-submit" type="submit" disabled={isLimitedPlayer}>
             {loading ? <Loader2 className="spin" size={18} /> : <CheckCircle2 size={18} />}
-            {isLimitedPlayer ? "Limite semanal atingido" : loading ? "Criando match..." : "Publicar match fake"}
+            {isLimitedPlayer ? "Limite semanal atingido" : loading ? "Criando match..." : "Publicar match"}
           </button>
         </form>
       </Card>

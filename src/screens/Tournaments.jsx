@@ -12,13 +12,13 @@ function Tournaments({ accessRole = "jogador", onNotify }) {
       <section className="screen-heading">
         <span className="badge gold">Torneios Gold</span>
         <h2>Chaves, tabela, artilharia e premiação.</h2>
-        <p>Campeonatos mockados com aparência de painel profissional.</p>
+        <p>Campeonatos com aparencia de painel profissional.</p>
       </section>
 
       <button
         className="primary-button full-button"
         disabled={!canCreateTournament}
-        onClick={() => onNotify?.(canCreateTournament ? "Criador de torneio fake aberto" : "Criar torneios e recurso Craque")}
+        onClick={() => onNotify?.(canCreateTournament ? "Criador de torneio aberto" : "Criar torneios e recurso Craque")}
         type="button"
       >
         <Plus size={18} />
@@ -43,7 +43,7 @@ function Tournaments({ accessRole = "jogador", onNotify }) {
         <div className="section-title no-margin">
           <div>
             <Trophy size={18} />
-            <h2>Tabela fake geral</h2>
+            <h2>Tabela geral</h2>
           </div>
         </div>
         <div className="standings-list">

@@ -1,13 +1,10 @@
-import { Activity } from "lucide-react";
+import SportMatchLogo from "./SportMatchLogo";
 
 function SplashScreen({ visible }) {
   return (
     <div className={visible ? "splash-screen" : "splash-screen hide"} aria-hidden={!visible}>
-      <div className="splash-mark">
-        <Activity size={38} />
-      </div>
-      <h2>SportMatch</h2>
-      <p>Matches, torneios e impacto social em um só app.</p>
+      <SportMatchLogo className="splash-logo" />
+      <p>Matches, torneios e impacto social em um so app.</p>
       <span className="splash-loader" />
     </div>
   );

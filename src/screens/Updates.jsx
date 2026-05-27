@@ -9,7 +9,7 @@ function Updates() {
       <section className="screen-heading">
         <span className="badge">Atualizacoes</span>
         <h2>Novidades e sinais inteligentes.</h2>
-        <p>Alertas, roadmap e mensagens fake que deixam o app vivo sem poluir a Home.</p>
+        <p>Alertas, roadmap e mensagens inteligentes que deixam o app vivo sem poluir a Home.</p>
       </section>
 
       <Card className="update-featured" glow>

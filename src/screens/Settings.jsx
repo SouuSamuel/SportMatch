@@ -1,6 +1,7 @@
 import { Bell, Globe2, Lock, Shield, SlidersHorizontal, Trophy } from "lucide-react";
 
 import Card from "../components/Card";
+import SportMatchLogo from "../components/SportMatchLogo";
 import ThemeSelector from "../components/ThemeSelector";
 import { themes } from "../data/mockData";
 
@@ -10,8 +11,13 @@ function Settings({ themeId, onThemeChange }) {
       <section className="screen-heading">
         <span className="badge">Perfil • Configurações</span>
         <h2>Temas e preferências</h2>
-        <p>Personalize o visual do SportMatch e veja recursos fake de produto.</p>
+        <p>Personalize o visual do SportMatch e seus recursos de produto.</p>
       </section>
+
+      <Card className="settings-brand-card" glow>
+        <SportMatchLogo />
+        <p>Identidade premium para arena, matches e descoberta de talentos.</p>
+      </Card>
 
       <Card className="settings-card" glow>
         <h3>
@@ -39,10 +45,10 @@ function Settings({ themeId, onThemeChange }) {
       </Card>
 
       <Card className="settings-list">
-        <SettingRow icon={Bell} label="Notificações fake" value="Matches, torneios e olheiros" enabled />
-        <SettingRow icon={Lock} label="Privacidade fake" value="Perfil visível para olheiros" enabled />
-        <SettingRow icon={Globe2} label="Idioma fake" value="Português Brasil" />
-        <SettingRow icon={Trophy} label="Modo competitivo fake" value="Ranking e MVP ativados" enabled />
+        <SettingRow icon={Bell} label="Notificacoes" value="Matches, torneios e olheiros" enabled />
+        <SettingRow icon={Lock} label="Privacidade" value="Perfil visivel para olheiros" enabled />
+        <SettingRow icon={Globe2} label="Idioma" value="Portugues Brasil" />
+        <SettingRow icon={Trophy} label="Modo competitivo" value="Ranking e MVP ativados" enabled />
         <SettingRow icon={Shield} label="Preferências do usuário" value="Fair play em destaque" enabled />
       </Card>
     </div>
@@ -59,7 +65,7 @@ function SettingRow({ icon: Icon, label, value, enabled = false }) {
         <strong>{label}</strong>
         <small>{value}</small>
       </div>
-      <button className={enabled ? "fake-toggle on" : "fake-toggle"} type="button" aria-label={label}>
+      <button className={enabled ? "setting-toggle on" : "setting-toggle"} type="button" aria-label={label}>
         <i />
       </button>
     </div>

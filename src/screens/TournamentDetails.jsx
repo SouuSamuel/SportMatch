@@ -76,7 +76,7 @@ function TournamentDetails({ onNotify }) {
         </Card>
 
         <Card>
-          <h3>Patrocinadores fake</h3>
+          <h3>Patrocinadores</h3>
           <div className="sponsor-grid">
             {tournament.sponsors.map((sponsor) => (
               <span key={sponsor}>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Award, CalendarDays, Flame, Medal, Settings, ShieldCheck, Star, Zap } from "lucide-react";
 
 import Card from "../components/Card";
+import SportMatchLogo from "../components/SportMatchLogo";
 import { profile, progression } from "../data/mockData";
 
 function Profile({ accessRole = "jogador" }) {
@@ -10,6 +11,7 @@ function Profile({ accessRole = "jogador" }) {
   return (
     <div className="screen-stack">
       <section className={isCraque ? "profile-card-main premium" : "profile-card-main"}>
+        <SportMatchLogo compact className="profile-logo" />
         <div className="profile-photo">{profile.photo}</div>
         <div>
           <span className={isCraque ? "badge gold" : "badge"}>

@@ -28,7 +28,7 @@ function SocialImpact() {
       <Card className="impact-chart" glow>
         <h3>
           <LineChart size={18} />
-          Gráficos fake modernos
+          Graficos modernos
         </h3>
         <div className="chart-bars">
           {socialImpact.bars.map((bar) => (

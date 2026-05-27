@@ -39,7 +39,7 @@ function Creators({ onNotify }) {
         </div>
         <div className="live-rail">
           {liveCreators.map((creator) => (
-            <button key={creator.id} type="button" onClick={() => onNotify?.("Entrando na live fake")}>
+            <button key={creator.id} type="button" onClick={() => onNotify?.("Entrando na live")}>
               <span>
                 <Play size={18} />
               </span>
@@ -115,7 +115,7 @@ function CreatorCard({ creator, onNotify }) {
           <Heart size={15} />
           {likes}
         </button>
-        <button onClick={() => onNotify?.("Live fake aberta")} type="button">
+        <button onClick={() => onNotify?.("Live aberta")} type="button">
           <Radio size={15} />
           Live
         </button>

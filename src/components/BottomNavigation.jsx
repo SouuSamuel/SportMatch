@@ -27,8 +27,16 @@ const adminItems = [
   { to: "/mais", label: "Mais", icon: Menu },
 ];
 
+const scoutItems = [
+  { to: "/olheiros", label: "Radar", icon: ShieldAlert },
+  { to: "/", label: "Home", icon: Home },
+  { to: "/matches", label: "Matches", icon: Radio },
+  { to: "/perfil", label: "Perfil", icon: UserRound },
+  { to: "/mais", label: "Mais", icon: Menu },
+];
+
 function BottomNavigation({ accessRole = "jogador" }) {
-  const items = accessRole === "admin" ? adminItems : accessRole === "craque" ? craqueItems : playerItems;
+  const items = accessRole === "admin" ? adminItems : accessRole === "olheiro" ? scoutItems : accessRole === "craque" ? craqueItems : playerItems;
 
   return (
     <nav className="bottom-navigation" aria-label="Menu inferior">

@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { CalendarDays, Clapperboard, HandHeart, Sparkles, Trophy, Zap } from "lucide-react";
+import { CalendarDays, Clapperboard, HandHeart, Medal, Sparkles, Trophy, UserPlus, Zap } from "lucide-react";
 
 import Card from "../components/Card";
 import TournamentCard from "../components/TournamentCard";
-import { forYou, highlights, socialImpact, tournaments } from "../data/mockData";
+import { forYou, highlights, lobbyPlayers, socialImpact, tournaments } from "../data/mockData";
 
-function Home({ accessRole = "jogador", matches }) {
+function Home({ accessRole = "jogador", matches, onJoinMatch }) {
   const nextMatch = matches[0];
   const isCraque = accessRole === "craque";
 
@@ -19,6 +19,46 @@ function Home({ accessRole = "jogador", matches }) {
         <Link className="mini-button" to="/para-voce">
           Para Voce
         </Link>
+      </section>
+
+      <section className="sport-lobby-section">
+        <div className="sport-lobby-head">
+          <div>
+            <span className="badge gold">
+              <Medal size={14} />
+              Lobby SportMatch
+            </span>
+            <h2>Arena acesa com atletas em destaque.</h2>
+            <p>Ranking semanal, MVP e convites para novos matches em um visual de arena.</p>
+          </div>
+          <span className="mvp-badge">MVP: Lucas "Raio"</span>
+        </div>
+
+        <div className="lobby-player-grid">
+          {lobbyPlayers.map((player) => (
+            <article className="lobby-player-card" data-tone={player.tone} key={player.id}>
+              <div className="lobby-rank">#{player.rank}</div>
+              <div className="lobby-avatar" data-pose={player.pose}>
+                <span />
+                <i />
+              </div>
+              <div className="lobby-player-copy">
+                <strong>{player.name}</strong>
+                <small>{player.sport} - Nota {player.rating}</small>
+                <em>{player.tag}</em>
+              </div>
+              <div className="lobby-actions">
+                <Link className="ghost-button" to="/perfil">
+                  Ver perfil
+                </Link>
+                <button type="button" onClick={() => onJoinMatch?.(`Convite enviado para ${player.name}`)}>
+                  <UserPlus size={14} />
+                  Convidar
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
 
       <Card className={isCraque ? "access-status-card premium" : "access-status-card"}>
@@ -80,7 +120,7 @@ function Home({ accessRole = "jogador", matches }) {
       <div className="highlight-row">
         {highlights.map((highlight) => (
           <Card className="mini-highlight-card" key={highlight.title}>
-            <span className="fake-thumbnail small">
+            <span className="media-thumbnail small">
               <Zap size={18} />
             </span>
             <strong>{highlight.title}</strong>

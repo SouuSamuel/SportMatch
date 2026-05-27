@@ -1,12 +1,14 @@
-import { Crown, ShieldCheck, Sparkles, UserRound } from "lucide-react";
+import { Crown, Radar, ShieldCheck, Sparkles, UserRound } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+import SportMatchLogo from "../components/SportMatchLogo";
 import { accessProfiles } from "../data/mockData";
 
 const accessIcons = {
   jogador: UserRound,
   craque: Crown,
   admin: ShieldCheck,
+  olheiro: Radar,
 };
 
 function Login({ onSelectAccess }) {
@@ -20,12 +22,13 @@ function Login({ onSelectAccess }) {
   return (
     <main className="login-screen">
       <section className="login-hero">
+        <SportMatchLogo className="login-logo" />
         <span className="badge">
           <Sparkles size={14} />
-          Login fake
+          Arena digital
         </span>
-        <h1>Escolha como entrar no SportMatch.</h1>
-        <p>Sem autenticacao real: a experiencia muda por perfil usando apenas estado local e localStorage.</p>
+        <h1>Entre no SportMatch.</h1>
+        <p>Conecte partidas, talentos, olheiros e operacao em uma experiencia esportiva premium.</p>
       </section>
 
       <section className="login-role-grid" aria-label="Tipos de acesso">
@@ -37,7 +40,7 @@ function Login({ onSelectAccess }) {
                 <Icon size={24} />
               </span>
               <em>{profile.badge}</em>
-              <strong>{profile.label}</strong>
+              <strong>Entrar como {profile.label}</strong>
               <small>{profile.description}</small>
               <b>{profile.price}</b>
               <span className="login-role-meta">

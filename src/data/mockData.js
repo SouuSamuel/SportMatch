@@ -367,6 +367,49 @@ export const players = [
   },
 ];
 
+export const lobbyPlayers = [
+  {
+    id: "lucas-raio",
+    name: 'Lucas "Raio" Mendes',
+    sport: "Futebol",
+    rating: "4.9",
+    rank: 1,
+    pose: "sprint",
+    tone: "green",
+    tag: "MVP da semana",
+  },
+  {
+    id: "ana-muralha",
+    name: 'Ana "Muralha" Costa',
+    sport: "Volei",
+    rating: "4.8",
+    rank: 2,
+    pose: "block",
+    tone: "blue",
+    tag: "Defesa elite",
+  },
+  {
+    id: "pedro-clutch",
+    name: 'Pedro "Clutch" Alves',
+    sport: "Basquete",
+    rating: "4.7",
+    rank: 3,
+    pose: "jump",
+    tone: "orange",
+    tag: "Decisivo",
+  },
+  {
+    id: "rafa-10",
+    name: 'Rafa "10" Lima',
+    sport: "Futebol",
+    rating: "4.9",
+    rank: 4,
+    pose: "control",
+    tone: "gold",
+    tag: "Camisa 10",
+  },
+];
+
 export const profile = {
   name: "Samuel Alves",
   role: "Meia ofensivo",
@@ -457,9 +500,18 @@ export const accessProfiles = [
     label: "Administrador",
     price: "Painel interno",
     badge: "Operacao",
-    description: "Moderacao, parceiros, ONGs, torneios e relatorios fake.",
+    description: "Moderacao, parceiros, ONGs, torneios e relatorios operacionais.",
     destination: "/admin",
     stats: ["Solicitacoes", "Denuncias", "Parceiros"],
+  },
+  {
+    id: "olheiro",
+    label: "Olheiro",
+    price: "Radar profissional",
+    badge: "Scout",
+    description: "Descobrir atletas, acompanhar rankings e avaliar talentos em destaque.",
+    destination: "/olheiros",
+    stats: ["Radar de talentos", "Notas 85+", "Fair play alto"],
   },
 ];
 
@@ -504,7 +556,7 @@ export const partners = [
     name: "PowerBar",
     type: "Patrocinador",
     description: "Kits, premiacoes e ativacoes para torneios Gold e lives da comunidade.",
-    impact: "R$ 8.4k em premios fake",
+    impact: "R$ 8.4k em premios e ativacoes",
   },
 ];
 
@@ -544,7 +596,7 @@ export const adminRequests = [
     id: "parceiro-1",
     group: "Parceiros",
     title: "Escola Futuro Atleta solicitou cadastro",
-    description: "Enviar para validacao visual e contrato fake.",
+    description: "Enviar para validacao visual e contrato comercial.",
     severity: "Baixa",
     action: "Aprovar",
   },
@@ -560,7 +612,7 @@ export const adminRequests = [
     id: "relatorio-1",
     group: "Relatorios",
     title: "Resumo mensal pronto para revisao",
-    description: "Comparativo de receita fake, impacto social e retencao.",
+    description: "Comparativo de receita, impacto social e retencao.",
     severity: "Baixa",
     action: "Marcar como resolvido",
   },
@@ -619,7 +671,7 @@ export const creators = [
     topVideo: "Final Arena Norte minuto a minuto",
     live: true,
     rank: 2,
-    description: "Transmissão fake com placar, chat e comentários em tempo real.",
+    description: "Transmissao com placar, chat e comentarios em tempo real.",
   },
   {
     id: "react-lances",
@@ -685,7 +737,7 @@ export const updates = [
     id: "solidary-system",
     title: "Sistema de torneios solidários atualizado",
     tag: "Impacto social",
-    description: "Novos contadores fake de alimentos, roupas e ONGs parceiras.",
+    description: "Novos contadores de alimentos, roupas e ONGs parceiras.",
   },
   {
     id: "city-ranking",

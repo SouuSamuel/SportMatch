@@ -17,7 +17,7 @@ function CommunityCard({ post }) {
         </div>
       </div>
       <p>{post.text}</p>
-      <div className="fake-video">
+      <div className="media-video">
         <PlaySquare size={20} />
         {post.video}
       </div>
@@ -35,9 +35,9 @@ function CommunityCard({ post }) {
           {post.group}
         </span>
       </div>
-      <div className="fake-comment">
+      <div className="community-comment">
         <Send size={13} />
-        Comentário fake enviado no feed
+        Comentario enviado no feed
       </div>
     </Card>
   );

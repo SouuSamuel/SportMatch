@@ -62,7 +62,7 @@ function MatchDetails({ matches, onNotify }) {
       </div>
 
       <Card>
-        <h3>Chat fake da partida</h3>
+        <h3>Chat da partida</h3>
         <div className="chat-list">
           {match.chat.map((item) => (
             <div className="chat-bubble" key={`${item.name}-${item.message}`}>

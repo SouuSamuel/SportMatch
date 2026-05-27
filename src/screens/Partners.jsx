@@ -17,13 +17,13 @@ function Partners({ onNotify }) {
     <div className="screen-stack partners-screen">
       <section className="screen-heading">
         <span className="badge gold">Parceiros</span>
-        <h2>Rede fake de quadras, escolas, ONGs e patrocinadores.</h2>
+        <h2>Rede de quadras, escolas, ONGs e patrocinadores.</h2>
         <p>Uma camada visual para mostrar que o SportMatch opera como plataforma completa.</p>
       </section>
 
       <div className="partner-summary-strip">
         <span>5 categorias</span>
-        <span>38 parceiros simulados</span>
+        <span>38 parceiros ativos</span>
         <span>+2.3t impacto social</span>
       </div>
 
@@ -41,7 +41,7 @@ function Partners({ onNotify }) {
                 <p>{partner.description}</p>
                 <strong>{partner.impact}</strong>
               </div>
-              <button className="mini-button" type="button" onClick={() => onNotify?.("Parceria aberta em modo fake")}>
+              <button className="mini-button" type="button" onClick={() => onNotify?.("Parceria aberta")}>
                 Ver parceria
               </button>
             </Card>

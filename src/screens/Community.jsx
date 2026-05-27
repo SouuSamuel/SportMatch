@@ -10,7 +10,7 @@ function Community() {
       <div className="screen-heading">
         <span className="badge">Rede social esportiva</span>
         <h2>Feed, resenhas, debates e grupos privados.</h2>
-        <p>Conteúdo fake para demonstrar comunidade viva e engajada.</p>
+        <p>Conteudo esportivo para manter a comunidade viva e engajada.</p>
       </div>
 
       <Card className="composer-card">
@@ -33,16 +33,16 @@ function Community() {
         <Card>
           <h3>
             <Lock size={18} />
-            Moderação fake
+            Moderacao ativa
           </h3>
-          <p>Badges, denúncias simuladas e ranking de fair play para manter o clima bom.</p>
+          <p>Badges, denuncias e ranking de fair play para manter o clima bom.</p>
         </Card>
       </div>
 
       <Card>
         <h3>
           <MessageSquareText size={18} />
-          Comentários fake
+          Comentarios da comunidade
         </h3>
         <div className="chat-list">
           <div className="chat-bubble">"Esse app parece pronto para lançar."</div>
