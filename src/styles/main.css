@@ -3710,6 +3710,379 @@ select option {
   }
 }
 
+.access-switch {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.055);
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 0.68rem;
+  font-weight: 950;
+}
+
+.login-stage {
+  display: grid;
+  place-items: center;
+  padding: 22px;
+}
+
+.login-screen {
+  display: grid;
+  gap: 18px;
+  width: min(100%, 980px);
+}
+
+.login-hero {
+  display: grid;
+  gap: 12px;
+  padding: 22px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 18%, transparent), transparent 58%),
+    var(--surface-strong);
+}
+
+.login-hero h1 {
+  color: var(--text);
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1;
+}
+
+.login-hero p {
+  max-width: 620px;
+}
+
+.login-role-grid,
+.partner-grid,
+.plan-comparison-grid,
+.admin-control-grid,
+.admin-split-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.login-role-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.login-role-grid button {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-height: 260px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.075), transparent 52%),
+    var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  transition: 180ms ease;
+}
+
+.login-role-grid button:hover {
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  transform: translateY(-3px);
+}
+
+.login-role-icon,
+.partner-thumb {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--accent);
+}
+
+.login-role-grid em,
+.login-role-grid b,
+.admin-request-row em,
+.admin-stat-list em {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 950;
+}
+
+.login-role-grid strong {
+  color: var(--text);
+  font-size: 1.28rem;
+}
+
+.login-role-grid small,
+.login-role-meta i {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.login-role-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.login-role-meta i {
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.045);
+  font-style: normal;
+  font-weight: 850;
+}
+
+.access-status-card,
+.partner-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.access-status-card.premium,
+.profile-card-main.premium,
+.desktop-focus-card.premium,
+.desktop-plan-card.featured {
+  border-color: color-mix(in srgb, var(--accent-2) 42%, var(--line));
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-2) 14%, transparent), transparent 60%),
+    var(--surface-strong);
+}
+
+.access-status-card h3,
+.partner-card h3 {
+  margin-top: 8px;
+  color: var(--text);
+}
+
+.usage-limit-card {
+  display: grid;
+  gap: 8px;
+}
+
+.usage-limit-card h3 {
+  color: var(--text);
+}
+
+.usage-limit-card small,
+.partner-card strong {
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.limit-meter {
+  overflow: hidden;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.limit-meter span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+.plan-comparison-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.partner-summary-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.partner-summary-strip span {
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.045);
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 850;
+}
+
+.partner-grid {
+  grid-template-columns: 1fr;
+}
+
+.partner-card {
+  align-items: flex-start;
+}
+
+.partner-card > div {
+  min-width: 0;
+}
+
+.partner-card p {
+  margin-top: 7px;
+  font-size: 0.84rem;
+}
+
+.admin-control-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.admin-control-card {
+  display: grid;
+  gap: 6px;
+  min-height: 104px;
+}
+
+.admin-control-card svg,
+.admin-report-card svg {
+  color: var(--accent);
+}
+
+.admin-control-card strong {
+  color: var(--text);
+  font-size: 1.55rem;
+}
+
+.admin-control-card span {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+.admin-command-center {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-command-center h3,
+.admin-report-card h3 {
+  margin-top: 8px;
+  color: var(--text);
+}
+
+.admin-request-list,
+.admin-stat-list,
+.admin-partner-list {
+  display: grid;
+  gap: 8px;
+}
+
+.admin-request-row {
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.admin-request-row strong,
+.admin-request-row small,
+.admin-partner-list strong,
+.admin-partner-list small {
+  display: block;
+}
+
+.admin-request-row strong,
+.admin-partner-list strong {
+  color: var(--text);
+}
+
+.admin-request-row small,
+.admin-partner-list small {
+  margin-top: 3px;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.admin-request-row b {
+  width: fit-content;
+  padding: 5px 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent);
+  font-size: 0.68rem;
+}
+
+.admin-request-row div {
+  display: grid;
+  gap: 6px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.admin-request-row button,
+.desktop-admin-list button {
+  min-height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.055);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.admin-stat-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.admin-stat-list span,
+.admin-partner-list span {
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.admin-stat-list small,
+.admin-stat-list strong {
+  display: block;
+}
+
+.admin-stat-list small {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.admin-stat-list strong {
+  margin-top: 5px;
+  color: var(--text);
+  font-size: 1.25rem;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  filter: grayscale(0.35);
+  opacity: 0.62;
+}
+
+@media (max-width: 700px) {
+  .login-role-grid,
+  .plan-comparison-grid,
+  .admin-control-grid,
+  .admin-stat-list {
+    grid-template-columns: 1fr;
+  }
+
+  .access-status-card,
+  .partner-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
 @media (min-width: 1024px) {
   .desktop-experience {
     background:
@@ -4143,5 +4516,111 @@ select option {
   .community-desktop-card small {
     color: var(--accent);
     font-weight: 900;
+  }
+
+  .desktop-partner-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .desktop-partner-card {
+    gap: 10px;
+    min-height: 196px;
+  }
+
+  .desktop-partner-card h2,
+  .desktop-plan-card h2 {
+    color: var(--text);
+    font-size: 1.15rem;
+    line-height: 1.15;
+  }
+
+  .desktop-partner-card p,
+  .desktop-plan-card p {
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+
+  .desktop-partner-card small {
+    color: var(--accent);
+    font-weight: 900;
+  }
+
+  .desktop-partner-card .mini-button {
+    width: fit-content;
+    margin-top: auto;
+  }
+
+  .desktop-plans-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .desktop-plan-card {
+    gap: 12px;
+    min-height: 360px;
+  }
+
+  .desktop-plan-card > strong {
+    color: var(--text);
+    font-size: 1.6rem;
+  }
+
+  .desktop-plan-benefits {
+    display: grid;
+    gap: 7px;
+  }
+
+  .desktop-plan-benefits span {
+    padding: 8px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.045);
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 850;
+  }
+
+  .desktop-plan-card .primary-button {
+    margin-top: auto;
+  }
+
+  .desktop-admin-list {
+    display: grid;
+    gap: 8px;
+  }
+
+  .desktop-admin-list article {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 150px minmax(180px, 1fr) minmax(220px, 1.2fr) minmax(320px, auto);
+    gap: 10px;
+    min-height: 64px;
+    padding: 9px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.045);
+  }
+
+  .desktop-admin-list strong,
+  .desktop-admin-list small {
+    display: block;
+  }
+
+  .desktop-admin-list strong {
+    color: var(--text);
+    line-height: 1.15;
+  }
+
+  .desktop-admin-list small {
+    color: var(--text-muted);
+    font-size: 0.76rem;
+    line-height: 1.35;
+  }
+
+  .desktop-admin-list div {
+    display: grid;
+    gap: 6px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }

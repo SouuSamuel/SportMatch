@@ -4,7 +4,9 @@ import Card from "../components/Card";
 import TournamentCard from "../components/TournamentCard";
 import { tournaments } from "../data/mockData";
 
-function Tournaments({ onNotify }) {
+function Tournaments({ accessRole = "jogador", onNotify }) {
+  const canCreateTournament = accessRole === "craque" || accessRole === "admin";
+
   return (
     <div className="screen-stack">
       <section className="screen-heading">
@@ -13,9 +15,14 @@ function Tournaments({ onNotify }) {
         <p>Campeonatos mockados com aparência de painel profissional.</p>
       </section>
 
-      <button className="primary-button full-button" type="button">
+      <button
+        className="primary-button full-button"
+        disabled={!canCreateTournament}
+        onClick={() => onNotify?.(canCreateTournament ? "Criador de torneio fake aberto" : "Criar torneios e recurso Craque")}
+        type="button"
+      >
         <Plus size={18} />
-        Criar torneio
+        {canCreateTournament ? "Criar torneio" : "Criar torneio (Craque)"}
       </button>
 
       <button

@@ -1,17 +1,35 @@
 import { NavLink } from "react-router-dom";
-import { BellPlus, Clapperboard, Home, Menu, Sparkles, UserRound, Users } from "lucide-react";
+import { BellPlus, ClipboardList, Handshake, Home, Menu, Radio, ShieldAlert, Sparkles, UserRound, Users } from "lucide-react";
 
-const items = [
+const playerItems = [
   { to: "/", label: "Home", icon: Home },
-  { to: "/para-voce", label: "Para Voce", icon: Sparkles },
-  { to: "/criadores", label: "Criadores", icon: Clapperboard },
+  { to: "/matches", label: "Matches", icon: Radio },
   { to: "/comunidade", label: "Comun.", icon: Users },
   { to: "/perfil", label: "Perfil", icon: UserRound },
-  { to: "/atualizacoes", label: "Updates", icon: BellPlus },
+  { to: "/planos", label: "Planos", icon: Sparkles },
   { to: "/mais", label: "Mais", icon: Menu },
 ];
 
-function BottomNavigation() {
+const craqueItems = [
+  { to: "/", label: "Home", icon: Home },
+  { to: "/para-voce", label: "Para Voce", icon: Sparkles },
+  { to: "/matches", label: "Matches", icon: Radio },
+  { to: "/comunidade", label: "Comun.", icon: Users },
+  { to: "/perfil", label: "Perfil", icon: UserRound },
+  { to: "/mais", label: "Mais", icon: Menu },
+];
+
+const adminItems = [
+  { to: "/admin", label: "Admin", icon: ClipboardList },
+  { to: "/parceiros", label: "Parceiros", icon: Handshake },
+  { to: "/atualizacoes", label: "Alertas", icon: BellPlus },
+  { to: "/comunidade", label: "Reports", icon: ShieldAlert },
+  { to: "/mais", label: "Mais", icon: Menu },
+];
+
+function BottomNavigation({ accessRole = "jogador" }) {
+  const items = accessRole === "admin" ? adminItems : accessRole === "craque" ? craqueItems : playerItems;
+
   return (
     <nav className="bottom-navigation" aria-label="Menu inferior">
       {items.map((item) => {

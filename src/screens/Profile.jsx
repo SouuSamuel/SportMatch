@@ -4,26 +4,45 @@ import { Award, CalendarDays, Flame, Medal, Settings, ShieldCheck, Star, Zap } f
 import Card from "../components/Card";
 import { profile, progression } from "../data/mockData";
 
-function Profile() {
+function Profile({ accessRole = "jogador" }) {
+  const isCraque = accessRole === "craque";
+
   return (
     <div className="screen-stack">
-      <section className="profile-card-main">
+      <section className={isCraque ? "profile-card-main premium" : "profile-card-main"}>
         <div className="profile-photo">{profile.photo}</div>
         <div>
-          <span className="badge">Atleta verificado</span>
+          <span className={isCraque ? "badge gold" : "badge"}>
+            {isCraque ? "Craque premium" : "Atleta verificado"}
+          </span>
           <h2>{profile.name}</h2>
-          <p>{profile.role} • {profile.city}</p>
+          <p>{profile.role} - {profile.city}</p>
           <Link className="mini-button profile-settings-link" to="/configuracoes">
             <Settings size={14} />
-            Configurações
+            Configuracoes
           </Link>
         </div>
       </section>
 
       <Card className="profile-view-card">
-        <h3>Perfil visualizado por um olheiro</h3>
-        <p>Seu perfil recebeu 3 visitas profissionais nesta semana.</p>
+        <h3>{isCraque ? "Destaque ativo nos rankings" : "Perfil visualizado por um olheiro"}</h3>
+        <p>
+          {isCraque
+            ? "Seu selo premium aumenta prioridade em rankings, highlights e recomendacoes."
+            : "Seu perfil recebeu 3 visitas profissionais nesta semana."}
+        </p>
       </Card>
+
+      {!isCraque && (
+        <Card className="usage-limit-card">
+          <h3>Limite visual do Jogador</h3>
+          <p>Voce pode criar ate 2 matches por semana no plano gratuito.</p>
+          <div className="limit-meter">
+            <span style={{ width: "100%" }} />
+          </div>
+          <small>2/2 matches usados nesta semana</small>
+        </Card>
+      )}
 
       <Card className="progression-card" glow>
         <div className="progression-head">
@@ -76,7 +95,7 @@ function Profile() {
       <Card>
         <h3>
           <ShieldCheck size={18} />
-          Estatísticas
+          {isCraque ? "Estatisticas avancadas" : "Estatisticas"}
         </h3>
         <div className="profile-stats">
           {profile.stats.map((stat) => (
@@ -85,13 +104,25 @@ function Profile() {
               <span>{stat.label}</span>
             </div>
           ))}
+          {isCraque && (
+            <>
+              <div>
+                <strong>84%</strong>
+                <span>Retencao em matches</span>
+              </div>
+              <div>
+                <strong>#12</strong>
+                <span>Ranking da cidade</span>
+              </div>
+            </>
+          )}
         </div>
       </Card>
 
       <Card>
         <h3>
           <CalendarDays size={18} />
-          Histórico de partidas
+          Historico de partidas
         </h3>
         <div className="match-results">
           {profile.history.map((item) => (

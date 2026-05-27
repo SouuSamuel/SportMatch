@@ -4,7 +4,7 @@ import { CheckCircle2, Loader2 } from "lucide-react";
 
 import Card from "../components/Card";
 
-function CreateMatch({ onCreateMatch }) {
+function CreateMatch({ accessRole = "jogador", onCreateMatch }) {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     title: "Match Gold de sexta",
@@ -12,13 +12,19 @@ function CreateMatch({ onCreateMatch }) {
     time: "Hoje, 20:00",
     limit: "14",
     place: "Arena Norte",
-    level: "Intermediário",
+    level: "Intermediario",
     social: "solidario",
   });
   const navigate = useNavigate();
+  const isLimitedPlayer = accessRole === "jogador";
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    if (isLimitedPlayer) {
+      return;
+    }
+
     setLoading(true);
     window.setTimeout(() => {
       const id = `${form.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-")}-${Date.now()}`;
@@ -35,19 +41,19 @@ function CreateMatch({ onCreateMatch }) {
         status: "Novo",
         vibe: "criado agora",
         fill: 42,
-        organizer: "Você",
+        organizer: "Voce",
         social: form.social === "normal"
           ? null
           : {
-              badge: form.social === "agasalho" ? "👕 Campanha do Agasalho" : "🥫 Match Solidário",
-              requirement: "1kg de alimento não perecível OU roupas para doação",
-              ong: form.social === "agasalho" ? "Arena Solidária" : "ONG Esperança",
-              collected: "🥫 0kg arrecadados",
-              clothes: "👕 0 peças doadas",
+              badge: form.social === "agasalho" ? "Campanha do Agasalho" : "Match Solidario",
+              requirement: "1kg de alimento nao perecivel OU roupas para doacao",
+              ong: form.social === "agasalho" ? "Arena Solidaria" : "ONG Esperanca",
+              collected: "0kg arrecadados",
+              clothes: "0 pecas doadas",
             },
-        rules: ["Check-in 15 min antes", "Times equilibrados por nível", "Fair play obrigatório"],
-        players: ["Você", "Convidado 1", "Convidado 2"],
-        chat: [{ name: "Você", message: "Match criado com sucesso. Bora jogar!" }],
+        rules: ["Check-in 15 min antes", "Times equilibrados por nivel", "Fair play obrigatorio"],
+        players: ["Voce", "Convidado 1", "Convidado 2"],
+        chat: [{ name: "Voce", message: "Match criado com sucesso. Bora jogar!" }],
       });
       setLoading(false);
       navigate("/matches");
@@ -61,10 +67,26 @@ function CreateMatch({ onCreateMatch }) {
   return (
     <div className="screen-stack">
       <div className="screen-heading">
-        <span className="badge">Formulário fake</span>
+        <span className={isLimitedPlayer ? "badge" : "badge gold"}>
+          {isLimitedPlayer ? "Limite gratuito" : "Craque ilimitado"}
+        </span>
         <h2>Criar Match</h2>
-        <p>Simulação visual para organizar esporte, horário, local, limite e nível.</p>
+        <p>
+          {isLimitedPlayer
+            ? "Jogador gratuito tem limite visual de 2 matches por semana."
+            : "Criacao ilimitada de matches com prioridade visual para atletas Craque."}
+        </p>
       </div>
+
+      {isLimitedPlayer && (
+        <Card className="usage-limit-card">
+          <h3>2/2 matches usados nesta semana</h3>
+          <p>Assine Craque para liberar criacao ilimitada e destaque nos rankings.</p>
+          <div className="limit-meter">
+            <span style={{ width: "100%" }} />
+          </div>
+        </Card>
+      )}
 
       <Card className="form-card" glow>
         <form onSubmit={handleSubmit}>
@@ -78,12 +100,12 @@ function CreateMatch({ onCreateMatch }) {
               <option>Futebol 7</option>
               <option>Futsal</option>
               <option>Basquete</option>
-              <option>Vôlei</option>
+              <option>Volei</option>
             </select>
           </label>
           <div className="form-grid">
             <label>
-              Horário
+              Horario
               <input value={form.time} onChange={(event) => updateField("time", event.target.value)} />
             </label>
             <label>
@@ -96,25 +118,25 @@ function CreateMatch({ onCreateMatch }) {
             <input value={form.place} onChange={(event) => updateField("place", event.target.value)} />
           </label>
           <label>
-            Nível
+            Nivel
             <select value={form.level} onChange={(event) => updateField("level", event.target.value)}>
               <option>Iniciante</option>
-              <option>Intermediário</option>
-              <option>Avançado</option>
+              <option>Intermediario</option>
+              <option>Avancado</option>
               <option>Misto</option>
             </select>
           </label>
           <label>
-            Ação social
+            Acao social
             <select value={form.social} onChange={(event) => updateField("social", event.target.value)}>
-              <option value="solidario">🥫 Match Solidário</option>
-              <option value="agasalho">👕 Campanha do Agasalho</option>
+              <option value="solidario">Match Solidario</option>
+              <option value="agasalho">Campanha do Agasalho</option>
               <option value="normal">Match comum</option>
             </select>
           </label>
-          <button className="primary-button form-submit" type="submit">
+          <button className="primary-button form-submit" type="submit" disabled={isLimitedPlayer}>
             {loading ? <Loader2 className="spin" size={18} /> : <CheckCircle2 size={18} />}
-            {loading ? "Criando match..." : "Publicar match fake"}
+            {isLimitedPlayer ? "Limite semanal atingido" : loading ? "Criando match..." : "Publicar match fake"}
           </button>
         </form>
       </Card>

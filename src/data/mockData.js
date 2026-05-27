@@ -433,6 +433,139 @@ export const plans = [
   },
 ];
 
+export const accessProfiles = [
+  {
+    id: "jogador",
+    label: "Jogador",
+    price: "Gratis",
+    badge: "Acesso padrao",
+    description: "Entrar em matches, acompanhar comunidade, perfil e planos.",
+    destination: "/",
+    stats: ["2 matches/semana", "Perfil basico", "Comunidade liberada"],
+  },
+  {
+    id: "craque",
+    label: "Craque",
+    price: "R$ 9,90/mes",
+    badge: "Premium",
+    description: "Criar matches ilimitados, torneios, estatisticas avancadas e destaque.",
+    destination: "/",
+    stats: ["Matches ilimitados", "Criar torneios", "Ranking em destaque"],
+  },
+  {
+    id: "admin",
+    label: "Administrador",
+    price: "Painel interno",
+    badge: "Operacao",
+    description: "Moderacao, parceiros, ONGs, torneios e relatorios fake.",
+    destination: "/admin",
+    stats: ["Solicitacoes", "Denuncias", "Parceiros"],
+  },
+];
+
+export const partners = [
+  {
+    id: "arena-solidaria",
+    name: "Arena Solidaria",
+    type: "Arena",
+    description: "Espaco parceiro para matches solidarios, finais locais e eventos com arrecadacao.",
+    impact: "+74kg arrecadados em campanhas",
+  },
+  {
+    id: "ong-esperanca",
+    name: "ONG Esperanca",
+    type: "ONG",
+    description: "Recebe alimentos, roupas e conecta campanhas esportivas a familias atendidas.",
+    impact: "320 familias impactadas",
+  },
+  {
+    id: "projeto-jovem-campeao",
+    name: "Projeto Jovem Campeao",
+    type: "Escola social",
+    description: "Projeto de base com aulas gratuitas e avaliacao de jovens atletas.",
+    impact: "86 atletas acompanhados",
+  },
+  {
+    id: "escola-futuro-atleta",
+    name: "Escola Futuro Atleta",
+    type: "Escola",
+    description: "Turmas de iniciacao esportiva, torneios escolares e ranking sub-18.",
+    impact: "12 torneios apoiados",
+  },
+  {
+    id: "quadra-central",
+    name: "Quadra Central",
+    type: "Quadra",
+    description: "Reserva de horarios, basquete 3x3 e eventos noturnos para a comunidade.",
+    impact: "46 matches no mes",
+  },
+  {
+    id: "powerbar",
+    name: "PowerBar",
+    type: "Patrocinador",
+    description: "Kits, premiacoes e ativacoes para torneios Gold e lives da comunidade.",
+    impact: "R$ 8.4k em premios fake",
+  },
+];
+
+export const adminStats = [
+  { label: "Usuarios ativos", value: "12.8k", trend: "+18%" },
+  { label: "Matches semanais", value: "286", trend: "+24%" },
+  { label: "Parceiros", value: "38", trend: "+7" },
+  { label: "Impacto social", value: "+2.3t", trend: "+420kg" },
+];
+
+export const adminRequests = [
+  {
+    id: "solidario-1",
+    group: "Matches solidarios",
+    title: "Arena Norte pede selo solidario",
+    description: "Validar ONG Esperanca e meta de 90kg de alimentos.",
+    severity: "Alta",
+    action: "Aprovar",
+  },
+  {
+    id: "torneio-1",
+    group: "Torneios",
+    title: "Copa Bairro Sul aguardando aprovacao",
+    description: "16 times, premio local e parceiro Quadra Central.",
+    severity: "Media",
+    action: "Revisar",
+  },
+  {
+    id: "denuncia-1",
+    group: "Denuncias",
+    title: "Usuario reportado por falta grave",
+    description: "3 relatos no match Basquete 3x3 Noturno.",
+    severity: "Critica",
+    action: "Revisar",
+  },
+  {
+    id: "parceiro-1",
+    group: "Parceiros",
+    title: "Escola Futuro Atleta solicitou cadastro",
+    description: "Enviar para validacao visual e contrato fake.",
+    severity: "Baixa",
+    action: "Aprovar",
+  },
+  {
+    id: "evento-1",
+    group: "Eventos",
+    title: "Final Zona Sul pendente",
+    description: "Checar capacidade, transmissao e equipe de moderacao.",
+    severity: "Media",
+    action: "Recusar",
+  },
+  {
+    id: "relatorio-1",
+    group: "Relatorios",
+    title: "Resumo mensal pronto para revisao",
+    description: "Comparativo de receita fake, impacto social e retencao.",
+    severity: "Baixa",
+    action: "Marcar como resolvido",
+  },
+];
+
 export const progression = {
   level: 7,
   xp: 2840,

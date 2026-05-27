@@ -6,11 +6,14 @@ import {
   CalendarDays,
   ChevronRight,
   Clapperboard,
+  ClipboardList,
   Crown,
   Eye,
   Goal,
+  Handshake,
   HeartHandshake,
   LayoutDashboard,
+  LogOut,
   MapPin,
   Play,
   Radio,
@@ -26,7 +29,6 @@ import {
 import ThemeSelector from "./ThemeSelector";
 import {
   creators,
-  forYou,
   posts,
   progression,
   quickStats,
@@ -34,16 +36,38 @@ import {
   smartNotifications,
   tournaments,
   updates,
+  adminRequests,
+  adminStats,
+  partners,
+  plans,
 } from "../data/mockData";
 
 const sidebarItems = [
   { to: "/", label: "Home", icon: LayoutDashboard },
   { to: "/matches", label: "Matches", icon: Radio },
+  { to: "/comunidade", label: "Comunidade", icon: Users },
+  { to: "/perfil", label: "Perfil", icon: ShieldCheck },
+  { to: "/planos", label: "Planos", icon: Crown },
+];
+
+const craqueSidebarItems = [
+  { to: "/", label: "Home", icon: LayoutDashboard },
+  { to: "/matches", label: "Matches", icon: Radio },
   { to: "/torneios", label: "Torneios", icon: Crown },
   { to: "/criadores", label: "Criadores", icon: Clapperboard },
+  { to: "/parceiros", label: "Parceiros", icon: Handshake },
   { to: "/comunidade", label: "Comunidade", icon: Users },
   { to: "/impacto-social", label: "Impacto Social", icon: HeartHandshake },
   { to: "/atualizacoes", label: "Atualizacoes", icon: Sparkles },
+];
+
+const adminSidebarItems = [
+  { to: "/admin", label: "Painel", icon: ClipboardList },
+  { to: "/parceiros", label: "Parceiros", icon: Handshake },
+  { to: "/torneios", label: "Torneios", icon: Crown },
+  { to: "/comunidade", label: "Denuncias", icon: Users },
+  { to: "/impacto-social", label: "ONGs", icon: HeartHandshake },
+  { to: "/atualizacoes", label: "Relatorios", icon: Sparkles },
 ];
 
 const sportTabs = [
@@ -79,6 +103,10 @@ const routeMeta = {
   "/torneios": ["Torneios", "Competicoes em destaque com status, formato e MVP."],
   "/criadores": ["Criadores", "Canais, lives e rankings da comunidade esportiva."],
   "/comunidade": ["Comunidade", "Conversas, posts e grupos ativos."],
+  "/perfil": ["Perfil", "Selo, estatisticas, limites e progresso."],
+  "/planos": ["Planos", "Comparativo de acesso e monetizacao fake."],
+  "/parceiros": ["Parceiros", "Quadras, escolas, ONGs, arenas e patrocinadores."],
+  "/admin": ["Admin", "Painel operacional fake para moderacao e aprovacao."],
   "/impacto-social": ["Impacto Social", "Campanhas, doacoes e parceiros."],
   "/atualizacoes": ["Atualizacoes", "Alertas inteligentes e roadmap do produto."],
 };
@@ -90,7 +118,7 @@ const liveFeed = [
   "Live da final entrou em destaque",
 ];
 
-function DesktopExperience({ matches, themeId, onThemeChange, onNotify }) {
+function DesktopExperience({ accessRole = "jogador", activeAccess, matches, themeId, onResetAccess, onThemeChange, onNotify }) {
   const location = useLocation();
   const [pulse, setPulse] = useState(0);
   const [activeSport, setActiveSport] = useState("futebol");
@@ -112,6 +140,7 @@ function DesktopExperience({ matches, themeId, onThemeChange, onNotify }) {
     ],
     [],
   );
+  const menuItems = accessRole === "admin" ? adminSidebarItems : accessRole === "craque" ? craqueSidebarItems : sidebarItems;
 
   return (
     <section className="desktop-experience" aria-label="Desktop SportMatch">
@@ -127,7 +156,7 @@ function DesktopExperience({ matches, themeId, onThemeChange, onNotify }) {
         </Link>
 
         <nav className="desktop-menu" aria-label="Menu desktop">
-          {sidebarItems.map((item) => {
+          {menuItems.map((item) => {
             const Icon = item.icon;
             return (
               <NavLink key={item.to} to={item.to} end={item.to === "/"}>
@@ -139,12 +168,18 @@ function DesktopExperience({ matches, themeId, onThemeChange, onNotify }) {
         </nav>
 
         <div className="desktop-scout-card">
-          <span className="badge">Progresso</span>
-          <h3>Nivel {progression.level}</h3>
-          <p>{progression.streak}</p>
+          <span className={accessRole === "craque" || accessRole === "admin" ? "badge gold" : "badge"}>
+            {activeAccess?.label ?? "Progresso"}
+          </span>
+          <h3>{accessRole === "admin" ? "Operacao ativa" : accessRole === "craque" ? "Craque Premium" : `Nivel ${progression.level}`}</h3>
+          <p>{accessRole === "jogador" ? "2 matches por semana no plano gratuito" : activeAccess?.description}</p>
           <div className="desktop-progress">
             <span style={{ width: `${(progression.xp / progression.nextLevelXp) * 100}%` }} />
           </div>
+          <button type="button" onClick={onResetAccess}>
+            <LogOut size={15} />
+            Trocar acesso
+          </button>
         </div>
       </aside>
 
@@ -176,6 +211,7 @@ function DesktopExperience({ matches, themeId, onThemeChange, onNotify }) {
           <DesktopView
             activeSport={activeSport}
             desktopStats={desktopStats}
+            accessRole={accessRole}
             matches={matches}
             onNotify={onNotify}
             onSportChange={setActiveSport}
@@ -187,7 +223,11 @@ function DesktopExperience({ matches, themeId, onThemeChange, onNotify }) {
   );
 }
 
-function DesktopView({ activeSport, desktopStats, matches, onNotify, onSportChange, pathname }) {
+function DesktopView({ accessRole, activeSport, desktopStats, matches, onNotify, onSportChange, pathname }) {
+  if (pathname === "/admin") {
+    return <DesktopAdmin onNotify={onNotify} />;
+  }
+
   if (pathname.startsWith("/matches") || pathname.startsWith("/match/")) {
     return <DesktopMatches matches={matches} activeSport={activeSport} onSportChange={onSportChange} />;
   }
@@ -198,6 +238,10 @@ function DesktopView({ activeSport, desktopStats, matches, onNotify, onSportChan
 
   if (pathname === "/criadores") {
     return <DesktopCreators onNotify={onNotify} />;
+  }
+
+  if (pathname === "/parceiros") {
+    return <DesktopPartners onNotify={onNotify} />;
   }
 
   if (pathname === "/comunidade") {
@@ -212,10 +256,20 @@ function DesktopView({ activeSport, desktopStats, matches, onNotify, onSportChan
     return <DesktopUpdates />;
   }
 
-  return <DesktopHome desktopStats={desktopStats} matches={matches} />;
+  if (pathname === "/perfil") {
+    return <DesktopProfile accessRole={accessRole} />;
+  }
+
+  if (pathname === "/planos") {
+    return <DesktopPlans onNotify={onNotify} />;
+  }
+
+  return <DesktopHome accessRole={accessRole} desktopStats={desktopStats} matches={matches} />;
 }
 
-function DesktopHome({ desktopStats, matches }) {
+function DesktopHome({ accessRole, desktopStats, matches }) {
+  const isCraque = accessRole === "craque";
+
   return (
     <div className="desktop-view desktop-home-view">
       <section className="desktop-focus-card">
@@ -224,11 +278,11 @@ function DesktopHome({ desktopStats, matches }) {
             <Sparkles size={15} />
             Para Voce
           </span>
-          <h2>Proximo match, conteudo quente e impacto em um so lugar.</h2>
-          <p>{forYou.summary}</p>
+          <h2>{isCraque ? "Matches ilimitados, torneios e stats em um so lugar." : "Matches, comunidade e limite semanal em um so lugar."}</h2>
+          <p>{isCraque ? "Plano Craque ativo com ranking em destaque e criacao liberada." : "Plano Jogador com 2 matches por semana e upgrade visual para Craque."}</p>
         </div>
-        <Link className="primary-button" to="/matches">
-          Abrir Matches
+        <Link className="primary-button" to={isCraque ? "/criar-match" : "/planos"}>
+          {isCraque ? "Criar Match" : "Ver Planos"}
           <ChevronRight size={18} />
         </Link>
       </section>
@@ -479,6 +533,126 @@ function DesktopImpact() {
             <small>{stat.label}</small>
           </div>
         ))}
+      </section>
+    </div>
+  );
+}
+
+function DesktopPartners({ onNotify }) {
+  return (
+    <div className="desktop-view desktop-partners-view">
+      <section className="desktop-stat-grid compact">
+        {["Quadras", "Escolas", "ONGs", "Arenas", "Patrocinadores"].map((item, index) => (
+          <article className="desktop-stat-card" key={item}>
+            <span>{item}</span>
+            <strong>{index + 4}</strong>
+            <small>parceiros ativos</small>
+          </article>
+        ))}
+      </section>
+      <section className="desktop-partner-grid">
+        {partners.map((partner) => (
+          <article className="desktop-panel desktop-partner-card" key={partner.id}>
+            <span className="badge">{partner.type}</span>
+            <h2>{partner.name}</h2>
+            <p>{partner.description}</p>
+            <small>{partner.impact}</small>
+            <button className="mini-button" type="button" onClick={() => onNotify?.("Parceria aberta em modo fake")}>
+              Ver parceria
+            </button>
+          </article>
+        ))}
+      </section>
+    </div>
+  );
+}
+
+function DesktopProfile({ accessRole }) {
+  const isCraque = accessRole === "craque";
+
+  return (
+    <div className="desktop-view">
+      <section className={isCraque ? "desktop-focus-card premium" : "desktop-focus-card"}>
+        <div>
+          <span className={isCraque ? "badge gold" : "badge"}>{isCraque ? "Craque premium" : "Jogador gratuito"}</span>
+          <h2>{isCraque ? "Perfil com selo, destaque e estatisticas avancadas." : "Perfil padrao com limite visual de 2 matches por semana."}</h2>
+          <p>{isCraque ? "Ranking em destaque, criacao liberada e retencao avancada." : "Upgrade para liberar criacao ilimitada e torneios."}</p>
+        </div>
+      </section>
+      <section className="desktop-stat-grid compact">
+        {[
+          ["Nota geral", "4.9"],
+          ["Fair play", "98%"],
+          ["Matches semanais", isCraque ? "Ilimitado" : "2/2"],
+          ["Ranking", isCraque ? "#12" : "Basico"],
+          ["Retencao", isCraque ? "84%" : "Plano gratis"],
+        ].map(([label, value]) => (
+          <article className="desktop-stat-card" key={label}>
+            <span>{label}</span>
+            <strong>{value}</strong>
+            <small>{isCraque ? "premium ativo" : "upgrade disponivel"}</small>
+          </article>
+        ))}
+      </section>
+    </div>
+  );
+}
+
+function DesktopPlans({ onNotify }) {
+  return (
+    <div className="desktop-view">
+      <section className="desktop-match-columns desktop-plans-grid">
+        {plans.map((plan) => (
+          <article className={plan.featured ? "desktop-panel desktop-plan-card featured" : "desktop-panel desktop-plan-card"} key={plan.id}>
+            <span className={plan.featured ? "badge gold" : "badge"}>{plan.label}</span>
+            <h2>{plan.name}</h2>
+            <strong>{plan.price}</strong>
+            <p>{plan.positioning}</p>
+            <div className="desktop-plan-benefits">
+              {plan.benefits.slice(0, 5).map((benefit) => (
+                <span key={benefit}>{benefit}</span>
+              ))}
+            </div>
+            <button className="primary-button" type="button" onClick={() => onNotify?.(plan.id === "craque" ? "Plano Craque selecionado" : "Plano selecionado")}>
+              {plan.id === "craque" ? "Assinar Craque" : "Escolher"}
+            </button>
+          </article>
+        ))}
+      </section>
+    </div>
+  );
+}
+
+function DesktopAdmin({ onNotify }) {
+  return (
+    <div className="desktop-view desktop-admin-view">
+      <section className="desktop-stat-grid compact">
+        {adminStats.map((stat) => (
+          <article className="desktop-stat-card" key={stat.label}>
+            <span>{stat.label}</span>
+            <strong>{stat.value}</strong>
+            <small>{stat.trend}</small>
+          </article>
+        ))}
+      </section>
+
+      <section className="desktop-table-panel">
+        <PanelTitle icon={ClipboardList} title="Solicitacoes e moderacao" action="Fila admin" />
+        <div className="desktop-admin-list">
+          {adminRequests.map((request) => (
+            <article key={request.id}>
+              <span className="badge">{request.group}</span>
+              <strong>{request.title}</strong>
+              <small>{request.description}</small>
+              <div>
+                <button type="button" onClick={() => onNotify?.("✅ Solicitacao aprovada")}>Aprovar</button>
+                <button type="button" onClick={() => onNotify?.("🚫 Solicitacao recusada")}>Recusar</button>
+                <button type="button" onClick={() => onNotify?.("⚠️ Denuncia marcada para revisão")}>Revisar</button>
+                <button type="button" onClick={() => onNotify?.("✅ Marcado como resolvido")}>Resolver</button>
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
     </div>
   );

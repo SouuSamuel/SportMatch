@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
 import { Bell, Search, ShieldCheck } from "lucide-react";
 
-function Header() {
+function Header({ accessRole = "jogador", activeAccess }) {
+  const isCraque = accessRole === "craque";
+  const isAdmin = accessRole === "admin";
+
   return (
     <header className="app-header">
       <div className="header-top">
         <div>
-          <p className="eyebrow">SportMatch MVP</p>
-          <h1>Ola, Samuel</h1>
+          <p className="eyebrow">{activeAccess?.badge ?? "SportMatch MVP"}</p>
+          <h1>{isAdmin ? "Painel Admin" : isCraque ? "Ola, Craque" : "Ola, Samuel"}</h1>
         </div>
 
         <div className="header-actions">
@@ -29,9 +32,9 @@ function Header() {
       <div className="header-status">
         <span>
           <ShieldCheck size={15} />
-          MVP sem backend
+          {activeAccess?.label ?? "MVP sem backend"}
         </span>
-        <span>Alertas inteligentes ativos</span>
+        <span>{isCraque ? "Matches ilimitados" : isAdmin ? "Operacao fake ativa" : "2 matches/semana"}</span>
       </div>
     </header>
   );

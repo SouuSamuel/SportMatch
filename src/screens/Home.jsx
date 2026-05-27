@@ -5,20 +5,32 @@ import Card from "../components/Card";
 import TournamentCard from "../components/TournamentCard";
 import { forYou, highlights, socialImpact, tournaments } from "../data/mockData";
 
-function Home({ matches }) {
+function Home({ accessRole = "jogador", matches }) {
   const nextMatch = matches[0];
+  const isCraque = accessRole === "craque";
 
   return (
     <div className="screen-stack home-clean">
       <section className="home-smart-hero">
         <div>
-          <span className="badge">Resumo inteligente</span>
-          <h2>Hoje tem jogo, highlight e torneio no seu radar.</h2>
+          <span className={isCraque ? "badge gold" : "badge"}>{isCraque ? "Craque premium" : "Resumo inteligente"}</span>
+          <h2>{isCraque ? "Matches ilimitados, torneios e stats no seu radar." : "Hoje tem jogo, comunidade e plano no seu radar."}</h2>
         </div>
         <Link className="mini-button" to="/para-voce">
           Para Voce
         </Link>
       </section>
+
+      <Card className={isCraque ? "access-status-card premium" : "access-status-card"}>
+        <div>
+          <span className={isCraque ? "badge gold" : "badge"}>{isCraque ? "Ilimitado" : "Plano Jogador"}</span>
+          <h3>{isCraque ? "Criacao liberada para matches e torneios." : "Limite visual: 2 matches por semana."}</h3>
+          <p>{isCraque ? "Seu perfil ganha destaque em rankings e recomendacoes." : "Assine Craque para criar sem limite e ativar estatisticas avancadas."}</p>
+        </div>
+        <Link className="mini-button" to={isCraque ? "/criar-match" : "/planos"}>
+          {isCraque ? "Criar" : "Ver planos"}
+        </Link>
+      </Card>
 
       {nextMatch && (
         <Link className="next-match-card" to={`/match/${nextMatch.id}`}>

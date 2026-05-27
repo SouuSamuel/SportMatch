@@ -4,27 +4,31 @@ import Card from "../components/Card";
 import PlanCard from "../components/PlanCard";
 import { plans } from "../data/mockData";
 
-function Plans() {
+function Plans({ onNotify }) {
   return (
-    <div className="screen-stack">
+    <div className="screen-stack plans-screen">
       <section className="detail-hero plans-hero">
         <span className="badge gold">
           <Crown size={14} />
-          Monetização MVP
+          Planos SportMatch
         </span>
-        <h2>Planos com valor claro para cada tipo de usuario.</h2>
-        <p>Mais destaque, ferramentas profissionais e sensacao premium sem pesar a tela.</p>
+        <h2>Compare acessos e escolha a experiencia ideal.</h2>
+        <p>Jogador gratuito, Craque premium e Olheiro profissional em uma vitrine de SaaS esportivo.</p>
       </section>
 
       <div className="plan-trigger-strip">
+        <span>Jogador gratuito: 2 matches/semana</span>
         <span>Mais popular: Craque</span>
-        <span>Recomendado para atletas ativos</span>
         <span>Profissional: Olheiro</span>
       </div>
 
-      <div className="compact-list">
+      <div className="plan-comparison-grid">
         {plans.map((plan) => (
-          <PlanCard key={plan.id} plan={plan} />
+          <PlanCard
+            key={plan.id}
+            plan={plan}
+            onSelectPlan={() => onNotify?.(plan.id === "craque" ? "Plano Craque selecionado" : "Plano selecionado")}
+          />
         ))}
       </div>
 
@@ -34,8 +38,8 @@ function Plans() {
           Ideia de pitch
         </h3>
         <p>
-          O SportMatch pode crescer com assinaturas, destaque de torneios, badges
-          premium, vídeos e ferramentas para olheiros.
+          O SportMatch pode crescer com assinaturas, destaque de torneios, badges premium, videos e ferramentas para
+          olheiros.
         </p>
       </Card>
     </div>

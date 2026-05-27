@@ -2,7 +2,9 @@ import { CheckCircle2, Crown, Sparkles } from "lucide-react";
 
 import Card from "./Card";
 
-function PlanCard({ plan }) {
+function PlanCard({ onSelectPlan, plan }) {
+  const buttonLabel = plan.id === "craque" ? "Assinar Craque" : plan.id === "olheiro" ? "Conhecer Olheiro" : "Comecar gratis";
+
   return (
     <Card className={plan.featured ? "plan-card featured" : "plan-card"} glow={plan.featured}>
       {plan.featured && (
@@ -28,8 +30,8 @@ function PlanCard({ plan }) {
           </li>
         ))}
       </ul>
-      <button className="wide-button" type="button">
-        Escolher plano
+      <button className="wide-button" type="button" onClick={() => onSelectPlan?.(plan)}>
+        {buttonLabel}
       </button>
     </Card>
   );
